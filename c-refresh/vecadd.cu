@@ -136,7 +136,7 @@ int main(int argc, char *argv[]) {
     check_error(cudaMalloc(&d_c, n * sizeof(float)),"alloc d_c");    
 
 
-    check_error(cudaDeviceSynchronize(), "wait before loading aand b");
+    check_error(cudaDeviceSynchronize(), "wait before loading a and b");
     clock_gettime(CLOCK_MONOTONIC, &start);
 
     check_error(cudaMemcpy(d_a, ptra, n * sizeof(float), cudaMemcpyHostToDevice), "copy d_a");
