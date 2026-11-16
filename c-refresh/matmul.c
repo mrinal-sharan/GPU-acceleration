@@ -8,6 +8,7 @@
 #include <time.h>
 #include <math.h>
 
+
 bool parse_positive(const char *text, size_t *out){
         char *end;
         errno = 0;
@@ -29,9 +30,9 @@ bool parse_positive(const char *text, size_t *out){
 
 void my_matmul(const float *restrict a, const float *restrict b, float *restrict c, const size_t R, const size_t F, const size_t K){
 
-    for (size_t i=0; i<R; i++){
+    for (size_t k=0; k<F; k++){
         for (size_t j=0; j<K; j++){
-            for (size_t k=0; k<F; k++){
+            for (size_t i=0; i<R; i++){
                 c[i * K + j] += a[i * F + k] * b[k * K + j];
 
             }
@@ -185,6 +186,11 @@ clock_gettime(CLOCK_MONOTONIC, &end);
 
 ref_matmul(ptrA, ptrB, ptrRef, R, F, K);
 
+double ms_1 = (end.tv_sec - start.tv_sec) * 1e3
+          + (end.tv_nsec - start.tv_nsec) / 1e6;
+
+printf("time taken:%.9g ms", ms_1);
+
 long count = 0; 
 for (size_t i=0; i<R; i++){
         for (size_t j=0; j<K; j++){
@@ -203,10 +209,7 @@ for (size_t i=0; i<R; i++){
 
 printf("No. of same entries:%ld", count);
 
-double ms_1 = (end.tv_sec - start.tv_sec) * 1e3
-          + (end.tv_nsec - start.tv_nsec) / 1e6;
 
-printf("time taken:%.9g ms", ms_1);
 
     
 
