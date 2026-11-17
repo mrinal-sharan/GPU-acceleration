@@ -27,7 +27,7 @@ bool parse_positive(const char *text, size_t *out){
     // a, b and c must not overlap
 
 
-__global__ void my_matmul(const float *restrict a, const float *restrict b, float *restrict c, const size_t R, const size_t F, const size_t K){
+__global__ void my_matmul(const float *__restrict__ a, const float *__restrict__ b, float *__restrict__ c, const size_t R, const size_t F, const size_t K){
 
     for (size_t k=0; k<F; k++){
         for (size_t j=0; j<K; j++){
@@ -41,7 +41,7 @@ __global__ void my_matmul(const float *restrict a, const float *restrict b, floa
 
 }
 
-void ref_matmul(const float *restrict a, const float *restrict b, float *restrict c, const size_t R, const size_t F, const size_t K){
+void ref_matmul(const float *__restrict__ a, const float *__restrict__ b, float *__restrict__ c, const size_t R, const size_t F, const size_t K){
 
     double sum = 0;
 
