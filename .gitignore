@@ -1,14 +1,20 @@
 # C build outputs: executables have no extension on macOS, so ignore
-# everything in c-refresh/ and re-include files with an extension.
-c-refresh/*
-!c-refresh/*.*
-# Debug-symbol bundles (they have a dot, so the rule above lets them back in)
+# everything, re-include folders, then re-include files with an extension.
+*
+!*/
+!*.*
+!Makefile
+
+# Debug-symbol bundles and objects (the !*.* rule above lets them back in)
 *.dSYM/
 *.o
 
 # Editor-local config
 *.code-workspace
 
-# macOS folder metadata (kept last: the !c-refresh/*.* rule above would
-# otherwise re-include it, and in .gitignore the last matching rule wins)
+# Scratch file from a Colab mount test
+colab_test.txt
+
+# macOS folder metadata (kept last: !*.* would otherwise re-include it,
+# and in .gitignore the last matching rule wins)
 .DS_Store

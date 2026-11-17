@@ -1,0 +1,14 @@
+# Editor-only: nvcc in Colab remains the real compiler.
+If:
+  PathMatch: .*\.cu
+CompileFlags:
+  Add:
+    - -xcuda
+    - -nocudainc
+    - -nocudalib
+    - -isystem/Users/mymorningstar/.cuda-13.0-headers
+    # nvcc supplies these names automatically; clangd has to be told.
+    - -include
+    - __clang_cuda_runtime_wrapper.h
+    - -include
+    - /Users/mymorningstar/.cuda-13.0-headers/clangd_shim.h
